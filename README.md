@@ -1,4 +1,4 @@
-# Data-Structures-in-C
+# Data-Structures
 
 Simple implemention of singly-linked-list using object-oriented way.
 
