@@ -5,46 +5,47 @@ using namespace std;
 
 struct Node{
 		int Info;
-		struct node* Link;
+		struct Node* Link;
 	};
 	
 class LinkedList{				
 	private:		// by the way, default visibility of member variables is **private** 
-		struct node* START;
+		struct Node* START;
 	
-		struct node* CreateNode(){
+		struct Node* CreateNode()
+		{
 				struct Node* Tmp = new struct Node; 
 				return Tmp;
 		} 
 	public:
-		LinkedList(){ 	//constructor function
+		LinkedList()
+		{ 	//constructor function
 			this->START=NULL;
 		}		
-		void InsertNodeAtStart(){
-		
-			struct node* Tmp = this->CreateNode();
+		void InsertNodeAtStart()
+		{
+			struct Node* Tmp = this->CreateNode();
 			cout<<"Enter integer value to insert: "; 
 			cin>>Tmp->Info;
 			
 			if(this->START==NULL)
 				Tmp->Link=NULL;
 			else // if list is not empty
-				Tmp->Link=START;
-				
+				Tmp->Link=START;		
 			this->START=Tmp;
 		}	
-		void DeleteNodeFromEnd(){
-			
+		void DeleteNodeFromEnd()
+		{	
 			if(this->START==NULL)
 				cout<<"List is already empty!\n";
 			else{
-				struct node* ToDel = this->START;
+				struct Node* ToDel = this->START;
 				if(ToDel->Link==NULL){  // if list has only one node
 					delete ToDel;
 					this->START=NULL;
 				}
 				else{  // if list has more than one node		
-					while((ToDel->Link)->Link!=NULL){   // ToDel is previous node to the node to be deleted
+					while((ToDel->Link)->Link!=NULL){   // ToDel is pointer to the previous node to the node to be deleted
 						ToDel=ToDel->Link;
 					}
 					free(ToDel->Link);  // or del toDel->link
@@ -53,17 +54,22 @@ class LinkedList{
 				cout<<"Deleted node from end.";
 			}
 		}	
-		void View(){
+		void View()
+		{
 			if(this->START==NULL)
 				cout<<"List is empty!";
 			else{
-				struct node* Trvs = START;
+				struct Node* Trvs = START;
 				while(Trvs!=NULL){
 					cout<<Trvs->Info<<" ";
 					Trvs = Trvs->Link;
 				}
 			}
-		}				
+		}
+		~LinkedList()
+		{ 	
+			/* free heap memory of created object here */
+		}
 };
 int Menu(){
 	int Ch;
@@ -74,7 +80,9 @@ int Menu(){
 	cout<<"\n\nPlease, your choice? "; cin>>Ch;
 	return Ch;
 }
-int main(){	
+
+int main()
+{	
 	LinkedList List;
 	while(1){
 		system("cls");
